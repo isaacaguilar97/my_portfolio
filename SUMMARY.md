@@ -4,24 +4,37 @@
 
 ## Business Problems Solved
 
-* [Page 6](business-problems-solved/page-6.md)
+* [High-Performing Product Recommender](business-problems-solved/high-performing-product-recommender.md)
+* [Satisfaction Survey Analysis](business-problems-solved/satisfaction-survey-analysis.md)
+
+***
+
+* [Feedback Sentiment Filter](feedback-sentiment-filter.md)
+* [Data Quality Validation System](data-quality-validation-system.md)
 
 ## Statistics
 
-* [Page 1](statistics/page-1.md)
+* [Web Feature Experimentation - A/B Testing](statistics/web-feature-experimentation-a-b-testing.md)
+
+***
+
+* [Pancakes' Study - ANOVA](pancakes-study-anova.md)
+* [Speed over Time - Simple Linear Regression](speed-over-time-simple-linear-regression.md)
+* [Electricity Consumption - Multiple Linear Regression](electricity-consumption-multiple-linear-regression.md)
+* [Titanic Survival - Logistic Regression](titanic-survival-logistic-regression.md)
+* [Home Value Drivers - Analysis of Correlated Data](home-value-drivers-analysis-of-correlated-data.md)
 
 ## Predictive Modeling & Machine Learning
 
-* [Page 2](predictive-modeling-and-machine-learning/page-2.md)
+* [Predict Bike Demand - Boosted Model](predictive-modeling-and-machine-learning/predict-bike-demand-boosted-model.md)
 
-## Deep Learning
+***
 
-* [Page 3](deep-learning/page-3.md)
-
-## Dashboards & Data Visualizations
-
-* [Page 4](dashboards-and-data-visualizations/page-4.md)
-
-## Data Pipelines & Infrastructure
-
-* [Page 5](data-pipelines-and-infrastructure/page-5.md)
+* [Forest Cover Type - Stacked Model](forest-cover-type-stacked-model.md)
+* [Demand of Items per Store - Forecast Analysis](demand-of-items-per-store-forecast-analysis.md)
+* [Credit Score Engine - Default Likelihood](credit-score-engine-default-likelihood.md)
+* [You in NBA - Web Scraping, Data Wrangling & Data Visualization](you-in-nba-web-scraping-data-wrangling-and-data-visualization.md)
+* [Image Classification - CNN](image-classification-cnn.md)
+* [Customer Segmentaiton - Cluster Analysis](customer-segmentaiton-cluster-analysis.md)
+* [Recommendation System - Content-based filtering](recommendation-system-content-based-filtering.md)
+* [Chicago Crimes Batman Tool - Random Forest](chicago-crimes-batman-tool-random-forest.md)
