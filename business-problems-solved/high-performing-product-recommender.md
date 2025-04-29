@@ -4,11 +4,15 @@
 
 This project consisted on creating an automated system to **identify high-performing competitor products** that my old employer **did not offer at the time**, enabling **data-driven product expansion** recommendations. It integrated **regression modeling**, **feature extraction with CNNs**, **similarity search**, and an **interactive dashboard** built in **Shiny**.
 
+***
+
 ## 🔥 Problem Statement
 
 * Competitor catalogs contain **thousands of products** with varying levels of performance.
 * Our company seeks to **expand smartly**, focusing only on **high-performing products** we **currently do not sell**.
 * The project aims to **score competitor products**, **identify missing high-value items**, and **recommend** prioritized additions.
+
+***
 
 ## 🧩 Project Pipeline
 
@@ -29,7 +33,7 @@ This project consisted on creating an automated system to **identify high-perfor
   * Ensuring consistent feature naming and units
   * Removing duplicates and invalid entries
 
-> SQL Example:
+> Example (SQL):
 
 ```plsql
 SELECT 
@@ -64,9 +68,17 @@ Understand how **time of day** (controlling for day of week, month, holiday, etc
 
 _`Product Score = (SalesVolume/QuantitySold) × (Time*TimeCoefficient/60)`_
 
+* **SalesVolume / QuantitySold:**
+  * The **average price per unit sold** (normalized revenue).
+* **Time × TimeCoefficient:**
+  * `Time` represents the **actual time.**
+  * `TimeCoefficient` is the **effectiveness multiplier** based on the regression (whether that time boosts or hurts price).
+* **Dividing by 60:**
+  * Normalizes the `Time × TimeCoefficient` product to a comparable scale ("minutes" are being adjusted into a "per-hour" concept).
 
+This way if a product is sold at a highly favorable time (according to the model) and had a strong price/unit, it will get a higher product score.
 
-> R Example:
+> Example (R):
 
 ```r
 # Load necessary library
@@ -95,9 +107,7 @@ head(competitor_data)
 
 * Only the **top 15%** of products (those scoring above 80) were considered **high performers**.
 
-***
-
-#### 3. Feature Extraction (Images)
+### 3. Feature Extraction (Images)
 
 **Objective:**
 
@@ -108,13 +118,13 @@ Capture visual characteristics of products that structured metadata (like price 
 * Extracted **image feature vectors** using a pre-trained **ResNet50 CNN** (removing final classification layer).
 * **Structured features** (e.g., price, category) and **image vectors** were treated **separately**.
 
-> **Why separate?**
+**Why separate?**
 
 * **Advantages:** Allows flexibility to weight structured data and visual data differently.
 * **Tradeoff:** Combining them (by concatenating vectors) could allow a "unified" distance but might overweight one type.
 * **Recommended:** Separate at first, but later experiment with **concatenation after normalization** if higher precision is required.
 
-> **Example (PyTorch):**
+> Example (PyTorch):
 
 ```python
 pythonCopyEditresnet50 = models.resnet50(pretrained=True)
@@ -122,9 +132,7 @@ feature_extractor = torch.nn.Sequential(*(list(resnet50.children())[:-1]))
 # ... feature extraction code
 ```
 
-***
-
-#### 4. Product Similarity Search (K-Nearest Neighbors)
+### 4. Product Similarity Search (K-Nearest Neighbors)
 
 **Objective:**
 
@@ -140,15 +148,13 @@ Identify whether a **similar product** already exists in our catalog.
   * Top 3 nearest neighbors were retrieved.
   * **Upper 20%** of matches (based on similarity scores) were considered a "good enough match".
 
-> **Threshold rationale:**
+> Threshold rationale:
 
 * 20% cut-off ensures we focus on **closest matches** only.
 * Balances between **recall** (finding enough candidates) and **precision** (quality of matches).
 * A data-driven alternative: Analyze the distribution of distances and choose a cut-off at the elbow point (distance histogram inflection).
 
-***
-
-#### 5. Gap Detection
+### 5. Gap Detection
 
 **Objective:**
 
@@ -159,9 +165,7 @@ Identify high-performing products without a sufficiently similar match in our ca
 * Products with **no match** within the distance threshold were **flagged as gaps**.
 * Recommended these for potential addition.
 
-***
-
-#### 6. Interactive Recommendation Dashboard (Shiny)
+### 6. Interactive Recommendation Dashboard (Shiny)
 
 **Objective:**
 
@@ -180,7 +184,7 @@ Provide business users an **easy, interactive view** of product opportunities.
   * Top 3 closest matches with images and features
   * Match status (yes/no)
 
-> **Example (Shiny R):**
+> Example (Shiny R):
 
 ```r
 rCopyEditfluidPage(
@@ -200,7 +204,7 @@ rCopyEditfluidPage(
 
 ***
 
-### 📈 Results
+## 📈 Results
 
 | Metric                              | Result                           |
 | ----------------------------------- | -------------------------------- |
@@ -218,7 +222,7 @@ rCopyEditfluidPage(
 
 ***
 
-### 🧠 Key Learnings
+## 🧠 Key Learnings
 
 * Combining time-of-day adjustments into product scoring captured **hidden seasonality effects**.
 * Separately treating image features and structured features provided **interpretable** similarity insights.
@@ -227,8 +231,8 @@ rCopyEditfluidPage(
 
 ***
 
-### 🛤️ Next Steps
+## 🛤️ Next Steps
 
-* Explore **metric learning** (Siamese networks) to improve similarity modeling.
+* Improve score formula by taking into consideration the marginal profit per item.
 * Dynamic thresholding by category (jewelry vs. electronics vs. home goods).
 * Feedback loop to capture accepted/rejected recommendations and retrain the similarity model.
