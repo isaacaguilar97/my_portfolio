@@ -19,14 +19,14 @@ This project consisted on creating an automated system to **identify high-perfor
 ### 1. Data Collection and Preprocessing
 
 * **Sources:**\
-  Data was sourced from an **Oracle database** containing competitor product catalogs, including:
+  Data was sourced from an **Oracle database** containing competitor product transactions, including:
   * Product descriptions
   * Pricing
   * Sales figures
   * Timestamps
   * Product images
 * **Cleaning and Transformation:**\
-  SQL was used to clean, transform, and prepare the data for modeling, inlcuding:
+  SQL was used to clean, transform, and prepare the data for modeling, including:
   * Handling missing values
   * Normalizing timestamps
   * Joining across multiple tables
@@ -40,7 +40,7 @@ SELECT
     product_id,
     product_name,
     price,
-    sales_count,
+    sales_amount,
     image_url,
     timestamp,
     category
@@ -53,30 +53,25 @@ WHERE price IS NOT NULL
 
 **Objective:**
 
-Understand how **time of day** (controlling for day of week, month, holiday, etc.) affects **sales** and use this to enhance product scoring.
+Create a product score that allows us to group products by performance (High, Regular, & Low) by taking into consideration the effect of time in sales (hour, day of week, month, holiday, etc.).
 
 **Methodology:**
 
-* Built a Multiple Linear Regression model:
+* Create a new dataset with aggregated data that displays the average sales per hour.
+* Build a Multiple Linear Regression model on that new dataset:
   * Independent Variables:\
-    Time of day, Day of Week, Week of Year, Month, Year, Holiday, Weekend
+    Hour, Day of Week, Week of Year, Month, Year, Holiday, Weekend
   * Dependent Variable:\
-    Sales (amount in dollars)
-* Extracted a time\_of\_day coefficient from the regression to adjust product sales based on sales timing.
+    Average Sales per hour (amount in dollars)
+* Compute and map the corresponding predicted sales per hour to our original dataset&#x20;
+* Calculate a Time Coefficient as the ratio of predicted sales to actual sales
+* Compute product score:
+  * _`Product Score = Sales × TimeCoefficient`_
+    * _`Sales`_ represent the **average sales per transaction/observation**.
+    * `TimeCoefficient` is the **effectiveness multiplier** based on the regression (whether that time boosts or hurts sales in general).
+* Aggregate the average score per product&#x20;
 
-**Product Score Formula:**
-
-_`Product Score = (SalesVolume/QuantitySold) × (Time*TimeCoefficient/60)`_
-
-* **SalesVolume / QuantitySold:**
-  * The **average price per unit sold** (normalized revenue).
-* **Time × TimeCoefficient:**
-  * `Time` represents the **actual time.**
-  * `TimeCoefficient` is the **effectiveness multiplier** based on the regression (whether that time boosts or hurts price).
-* **Dividing by 60:**
-  * Normalizes the `Time × TimeCoefficient` product to a comparable scale ("minutes" are being adjusted into a "per-hour" concept).
-
-This way if a product is sold at a highly favorable time (according to the model) and had a strong price/unit, it will get a higher product score.
+This way if a product is sold at a highly favorable time (according to the model) and had strong sales, it will get a higher product score.
 
 > Example (R):
 
@@ -87,16 +82,16 @@ library(dplyr)
 # Assume 'competitor_data' is your data frame
 
 # Fit the multiple linear regression
-model <- lm(price ~ minute + hour + day_of_week + week_of_year + month + year + holiday + weekend, data = competitor_data)
+model <- lm(sales ~ hour + day_of_week + week_of_year + month + year + holiday + weekend, data = competitor_data)
 
 # Predict price based on the time features
-competitor_data$predicted_price <- predict(model, competitor_data)
+competitor_data$predicted_sales <- predict(model, competitor_data)
 
-# Create the Time Coefficient as the ratio of predicted price to actual price
-competitor_data$time_coefficient <- competitor_data$predicted_price / competitor_data$price
+# Create the Time Coefficient as the ratio of predicted sales to actual sales
+competitor_data$time_coefficient <- competitor_data$predicted_sales / competitor_data$sales
 
 # Now compute the Product Score
-competitor_data$product_score <- (competitor_data$sales_volume / competitor_data$quantity_sold) * (competitor_data$time_coefficient / 60)
+competitor_data$product_score <- (competitor_data$sales)  * (competitor_data$time_coefficient)
 
 # View the data
 head(competitor_data)
@@ -105,7 +100,11 @@ head(competitor_data)
 
 **High-Performing Product Definition:**
 
+Based on the distribution of product scores, we labeled each product with a specific performance level.
+
 * Only the **top 15%** of products (those scoring above 80) were considered **high performers**.
+* The middle **70%** of products (those scoring between 50 to 80) were considered **regular performers**.
+* The bottom **15%** of products (those scoring below 50) were considered **low performers**.
 
 ### 3. Feature Extraction (Images)
 
