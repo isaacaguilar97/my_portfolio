@@ -304,7 +304,7 @@ This highlights the significant profit potential of targeted product expansion b
 
 ***
 
-## 🛤️ Next Steps
+## 🛤️ Future Improvements
 
 1. Enhance Competitor's Product Scoring
    * Improve the product score formula by incorporating marginal profit per item (i.e., unit sale price minus cost of goods sold) to better reflect financial impact.
