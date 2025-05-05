@@ -300,14 +300,14 @@ This tool provided a clear and efficient way to spot product gaps, evaluate alig
 
 Based on estimated average monthly sales of $2,000 per high-performing jewelry product and a typical cost of goods around $800, incorporating approximately 1,400 high-performing competitor items into the company’s catalog could generate an estimated $2.8 million in monthly revenue and over **$20 million in annual gross profit**.&#x20;
 
-This highlights the significant revenue potential of targeted product expansion based on similarity analysis and competitor benchmarking.
+This highlights the significant profit potential of targeted product expansion based on similarity analysis and competitor benchmarking.
 
 ***
 
 ## 🛤️ Next Steps
 
-1. Enhance Revenue Prediction Model
-   * Improve the sales score formula by incorporating marginal profit per item (i.e., unit sale price minus cost of goods sold) to better reflect financial impact.
+1. Enhance Competitor's Product Scoring
+   * Improve the product score formula by incorporating marginal profit per item (i.e., unit sale price minus cost of goods sold) to better reflect financial impact.
    * Extend the regression model by integrating additional structured product features (e.g., material, weight, category, brand) to improve the accuracy of sales predictions.
 2. &#x20;Refine Similarity Scoring
    * &#x20;Develop two separate similarity scores: one based on structured product features and another based on image embeddings.
@@ -320,4 +320,4 @@ This highlights the significant revenue potential of targeted product expansion 
 
 Identifying gaps through data isn't just about what competitors offer, it's about recognizing where your catalog has room to grow with purpose and precision.&#x20;
 
-Thank for reading, and keep the learning going.
+Thank for reading and keep the learning going.
