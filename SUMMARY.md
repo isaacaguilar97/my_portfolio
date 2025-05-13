@@ -39,3 +39,7 @@
 * [Customer Segmentaiton - Cluster Analysis](customer-segmentaiton-cluster-analysis.md)
 * [Recommendation System - Content-based filtering](recommendation-system-content-based-filtering.md)
 * [Chicago Crimes Batman Tool - Random Forest](chicago-crimes-batman-tool-random-forest.md)
+
+## Resources
+
+* [Project Template](resources/project-template.md)
