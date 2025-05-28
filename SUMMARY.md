@@ -10,7 +10,6 @@
 ***
 
 * [Feedback Sentiment Filter](feedback-sentiment-filter.md)
-* [Resources Optimization](resources-optimization.md)
 * [Data Quality Validation System](data-quality-validation-system.md)
 
 ## Statistics

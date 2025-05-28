@@ -6,17 +6,17 @@ description: Reviving a Unified Satisfaction Survey for Continuing Education
 
 ## 🛠️ Overview
 
-The satisfaction survey for the Continuing Education department had been discontinued due to its inability to provide consistent, actionable insights across a diverse range of programs. This project brought it back to life by redesigning the analysis methodology and condensing the survey structure without losing the depth of feedback using various regression analysis techniques.
+The satisfaction survey for the Continuing Education department had been discontinued due to its inability to provide consistent, actionable insights across a diverse range of programs. This project brought it back to life by identifying key perfomance indicators and condensing the survey structure using various regression analysis techniques.
 
 {% hint style="info" %}
-_Code snippets serve only as visual aids to represent the code used in the project. The actual code generated in this project are not shared for intellectual property reasons._
+_Code snippets serve only as visual aids to represent the code used in the project. The actual code generated in this project is not shared for intellectual property reasons._
 {% endhint %}
 
 ***
 
 ## 🔥 Problem Statement
 
-The Continuing Education department sought to measure satisfaction across various events and programs using a single unified survey. However, diverse goals, audiences, and KPIs across programs made it difficult to compare results meaningfully. The challenge was to transform the survey and analysis methodology in a way that honored those differences while still producing comparable satisfaction metrics.
+The Continuing Education department sought to measure satisfaction across various events and programs using a single unified survey. However, diverse goals, audiences, and KPIs across programs made it difficult to compare results meaningfully. The objective was to identify satisfaction drivers that were consistent across programs and to update the survey to reflect these common factors.
 
 ***
 
@@ -24,11 +24,11 @@ The Continuing Education department sought to measure satisfaction across variou
 
 ### 1. Survey Data Collection & Cleaning
 
-The original survey had two parts: a standardized set of 16 questions for all programs and a second section customized per program. Questions included demographic information, satisfaction, perceived value, cost, customer service, facilities, and open-ended feedback.
+The original survey had two parts: a standardized set of 16 questions for all programs and a second section tailored per program. Questions included demographic information, satisfaction, perceived value, cost, expectations, customer service, facilities, and open-ended feedback.
 
 **Sources:**
 
-* Qualtrics survey data brough in via API inlcluding:
+* Qualtrics survey data inlcluding:
   * Five years of survey responses
   * Metadata such as completion rate and time spent per respondent
 
@@ -37,7 +37,6 @@ The original survey had two parts: a standardized set of 16 questions for all pr
 * Removed duplicates and entries lacking satisfaction scores
 * Filtered for entries with at least 80% completion
 * Ensured reliable survey responses (avg. time spent was 1.6 to 2 minutes)
-* Transformed ordinal data to numeric for modeling
 
 > R Example
 
@@ -52,55 +51,112 @@ clean_data <- raw_data %>%
 
 ***
 
-### 2. Identifying Key Drivers of Satisfaction
+### 2. Exploratory Data Analysis
 
-With a cleaned dataset, I explored the relationships between variables to find which truly influenced satisfaction across programs.
+With the dataset cleaned, it's now both feasible and essential to explore the characteristics and relationships among the variables to inform the selection of an appropriate model.
 
-**Objective:**\
-Determine the most influential variables in satisfaction, accounting for demographic and program-specific differences.
+**Objective:**
+
+Perform an exploratory data analysis using statistical and visualization methods to uncover trends or insights that will help us choose the model.
 
 **Methodology:**
 
-* Performed exploratory data analysis to understand data structure and relationships
-* Noted multicollinearity (e.g., value highly correlated with satisfaction)
-* Applied linear regression, Ridge, LASSO, and Elastic Net for variable selection
-* Used Multinomial Logistic Regression for ordinal satisfaction outcomes
-* Modeled satisfaction with independent variables such as:
-  * Age
-  * Gender
-  * Role (participant or parent)
-  * Value, Customer Service, Reason for Enrolling
-  * Program attended
+*   Generate a statistical summary and visualized individual variables using histograms and box plots to assess distributions, central tendency, and variability.
+
+    <figure><img src="../.gitbook/assets/Screen Shot 2025-05-28 at 10.47.14 AM.png" alt=""><figcaption><p>Histograms examples</p></figcaption></figure>
+
+    * One numeric variables
+    * Five categorical variables
+    * Five ordinal variables
+      * Ordinal variables were scaled from 1 to 5, where 1 indicates the most negative response and 5 the most positive.
+    * The target variable, "Satisfaction," is ordinal.
+* Construct a correlation heatmap to identify strong linear relationships between explanatory variables.
 
 **Key Insights:**
 
-* Cost was not a significant factor in satisfaction
-* Customer service and perceived value were highly predictive
-* Role mattered—parents rated experiences differently than participants
-* The reason for enrollment also influenced satisfaction
+High multicollinearity was detected among **Perceived Value**, **Cost**, and **Expectations Met**, which means there is redundancy between questions. To address this, I would need to do variable selection using a penalized regression method such as LASSO or Elastic Net.&#x20;
 
-> R Example (Variable Selection)
+* This approach not only reduces the number of predictors used in the model but also has the added benefit of streamlining the survey by eliminating less informative questions—potentially improving the overall completion rate.
+
+Given that the target variable "Satisfaction" is ordinal with more than two levels, a **multinomial logistic regression** is an appropriate modeling approach. This allows for modeling the probability of responses across multiple ordered satisfaction levels.
+
+### 3. Variable Selection
+
+Variable selection is the process of choosing the most important questions or factors from a larger list to simplify the analysis by focusing only on the inputs that matter most.
+
+**Objective:**
+
+The goal of this step was to identify the most relevant predictors of satisfaction from a broader set of explanatory variables. Effective variable selection was crucial to improving model interpretability, addressing multicollinearity, and ultimately enhancing the performance and simplicity of the multinomial logistic regression model.
+
+**Methodology:**
+
+* Treat target variable as numeric just for feature selection.
+* Apply a suite of **regularized linear regression techniques t**o select the most informative features, including:
+  * **Ridge Regression** (L2 penalty): To identify variables with weaker influence while retaining all predictors.
+  * **LASSO Regression** (L1 penalty): To shrink less important coefficients to zero, effectively performing variable selection.
+  * **Elastic Net** (combination of L1 and L2 penalties): To balance between Ridge and LASSO, especially useful when predictors are highly correlated.
+* Compare the variable selection results across all three methods to identify consistent patterns in which variables were retained or eliminated.
+
+This comprehensive approach allowed for a robust evaluation of variable importance, accounting for both statistical strength and redundancy.
+
+> R Code (Example)
 
 ```r
-# Transform ordinal variables to numeric
-survey_data <- clean_data %>%
-  mutate(across(c(value_score, service_score, satisfaction_score), as.numeric))
-
-# LASSO Regression
+# Load libraries
 library(glmnet)
+library(caret)
 
-X <- model.matrix(satisfaction_score ~ age + gender + value_score + service_score + 
-                  role + reason_enrolled + program, data = survey_data)[, -1]
-y <- survey_data$satisfaction_score
+# Convert categorical predictors to dummy variables using model.matrix
+# Assume your data frame is called survey_data
+# and 'Satisfaction' is the target variable (ordinal 1-5)
 
-lasso_model <- cv.glmnet(X, y, alpha = 1)  # LASSO
+# Convert target to numeric
+y <- as.numeric(survey_data$Satisfaction)
 
-# Ridge Regression (alpha = 0)
-ridge_model <- cv.glmnet(X, y, alpha = 0)
+# Create design matrix for predictors (excluding the intercept)
+x <- model.matrix(Satisfaction ~ . - 1, data = survey_data)
 
-# Elastic Net (alpha between 0 and 1)
-enet_model <- cv.glmnet(X, y, alpha = 0.5)
+# LASSO (L1 Penalty)
+set.seed(123)
+cv_lasso <- cv.glmnet(x, y, alpha = 1)
+plot(cv_lasso)
+coef(cv_lasso, s = "lambda.min")  # View selected variables
+
+# Ridge (L2 Penalty)
+cv_ridge <- cv.glmnet(x, y, alpha = 0)
+plot(cv_ridge)
+coef(cv_ridge, s = "lambda.min")
+
+# Elastic Net (Mixed L1/L2)
+cv_enet <- cv.glmnet(x, y, alpha = 0.5)  # alpha = 0.5 is a mix of L1 and L2
+plot(cv_enet)
+coef(cv_enet, s = "lambda.min")
+
+# Extract variables with non-zero coefficients
+selected_vars <- coef(cv_lasso, s = "lambda.min")
+selected_vars <- selected_vars[selected_vars[, 1] != 0, , drop = FALSE]
+print(selected_vars)
 ```
+
+**Key insights:**
+
+Across all three methods, **Perceived Value** and **Cost** consistently had coefficients near zero or were entirely excluded, suggesting they provided limited unique predictive value in the presence of other variables. In contrast, **Expectations Met** retained a stronger coefficient, indicating it held more explanatory power.
+
+As a result, **Perceived Value** and **Cost** would be excluded from the final model to reduce redundancy and improve interpretability.&#x20;
+
+### 4. Identifying Key Drivers of Satisfaction (Multimonial Regression)
+
+With a cleaned dataset and a set of non-redundant variables, we can now build our final model to analyze what influences satisfaction the most.
+
+**Objective:**
+
+In this step we will identify which factors most strongly influence satisfaction across different programs, while accounting for demographic differences (such as role) and program-specific characteristics.
+
+**Methodology:**&#x20;
+
+* Conducted a multinomial regression analysis to model satisfaction outcomes
+* Evaluated p-values and coefficient estimates to assess variable significance
+* Interpreted results to identify key drivers of satisfaction
 
 > R Example (Multinomial Logistic Regression)
 
@@ -108,14 +164,29 @@ enet_model <- cv.glmnet(X, y, alpha = 0.5)
 # Multinomial Logistic Regression
 library(nnet)
 
-multi_model <- multinom(as.factor(satisfaction_score) ~ age + gender + value_score +
-                        service_score + role + reason_enrolled + program, data = survey_data)
+multi_model <- multinom(as.factor(Satisfaction) ~ age + gender + program + expectations_score +
+                        customer_service_score + role + reason_enrolled + program + facilities_score, data = survey_data)
 summary(multi_model)
+
+# Get z-values and p-values
+z <- summary(model)$coefficients / summary(model)$standard.errors
+p_values <- 2 * (1 - pnorm(abs(z)))
+
+# Print p-values
+print(p_values)
+
+# Print coefficients
+print(coef(model))
 ```
 
-***
+**Key Insights:**
 
-#### 3. Survey Redesign Based on Data
+* **Cost** was not a statistically significant predictor of satisfaction
+* **Customer service** and whether **expectations were met** were strong predictors of positive satisfaction outcomes
+* **Role differences** emerged: parents tended to rate their experiences worse than direct participants
+* The **reason for enrollment** (e.g., personal interest,  career advancement, etc.) had a notable impact on satisfaction levels
+
+### 5. Survey Redesign Based on Data
 
 After identifying which variables had the most predictive power and were generalizable across programs, I worked with the team to redesign the survey.
 
@@ -124,69 +195,49 @@ Create a leaner, more effective survey for consistent satisfaction benchmarking.
 
 **Methodology:**
 
-* Reduced the questionnaire to just 5 core questions + demographics
-  1. Overall satisfaction
-  2. Expectations met
-  3. Customer service
-  4. Reason for enrolling
-  5. Open-ended feedback
-* Used topic modeling and sentiment analysis on feedback to complement quantitative scores
-* Reduced average completion time by \~50%
-* Estimated a 30–40% increase in response rate based on industry benchmarks for shorter surveys
+* Reduced the questionnaire to just 7 core questions
+  1. Program
+  2. Role (Parent vs Participant)
+  3. Reason for enrolling
+  4. Expectations met
+  5. Customer service
+  6. Overall satisfaction
+  7. Open-ended feedback
 
-> R Example (Topic Modeling)
-
-```r
-library(tm)
-library(topicmodels)
-
-# Clean and prep text
-docs <- Corpus(VectorSource(survey_data$open_feedback))
-docs <- tm_map(docs, content_transformer(tolower))
-docs <- tm_map(docs, removePunctuation)
-docs <- tm_map(docs, removeWords, stopwords("en"))
-
-dtm <- DocumentTermMatrix(docs)
-lda_model <- LDA(dtm, k = 5)  # 5 topics
-topics <- terms(lda_model, 5)
-```
-
-**Example Improvements:**
-
-* Programs now share comparable metrics without losing their unique context
-* Satisfaction is now tied to generalizable factors like service and expectations rather than program-specific metrics
+The revised survey design not only reduced respondent burden but also preserved the most impactful predictors of satisfaction, enabling more consistent and actionable benchmarking across programs.
 
 ***
 
-### 📈 Results
+## 📈 Results
 
-The analysis and redesign led to the resurrection of the unified survey, now streamlined and backed by predictive modeling. Key results included:
+The analysis and redesign effort led to the revival of a unified, data-informed satisfaction survey. Key outcomes included:
 
-* A simplified yet powerful survey, improving response rate and clarity
-* Clear identification of department-wide KPIs (Customer Service, Expectations Met, Value)
+* A streamlined survey that improved clarity and reduced average completion time by approximately 50%
+* An estimated 30–40% increase in completion rate, based on industry benchmarks for shorter surveys
+* Clear identification of department-wide KPIs: **Customer Service & Expectations Met**
 * Executive buy-in following a strategic presentation to the Dean and Board
-* Actionable insights through topic modeling and demographic segmentation
-* A scalable model for ongoing root-cause analysis and satisfaction tracking
+* A scalable foundation for ongoing root-cause analysis and satisfaction tracking
 
-Though I left the company before implementation, the department accepted the proposal and placed my team in charge of deployment.
+Although I departed before full implementation, the department accepted the proposal and tasked my team with deployment. The final survey was concise, aligned with key metrics, and designed to support long-term program evaluation.
 
 ***
 
-### 🛤️ Future Improvements
+## 🛤️ Future Improvements
 
-**Enhance Comparability Across Time and Programs**
+To strengthen the value and impact of the satisfaction survey, here are a few possible enhancements:
 
-* Adjust satisfaction scores by demographic profile using normalization techniques
-* Introduce confidence intervals for satisfaction scores per segment
+**1. Enhance Multinomial Model**
 
-**Expand Text Analytics**
+* Explore interaction effects between satisfaction drivers and program type to uncover more nuanced, program-specific insights.
+* Evaluate the survey’s ongoing performance, revisiting predictive validity and model assumptions to ensure continued relevance.
 
-* Continue leveraging NLP to identify patterns in qualitative feedback
-* Build dashboards for department leads to interactively explore satisfaction trends
+**2. Expand Text Analytics for Deeper Insight**
 
-**Optimize Longitudinal Measurement**
+* Continue leveraging natural language processing (NLP), including topic modeling and sentiment analysis, to uncover root causes behind satisfaction trends.
 
-* Monitor shifts in satisfaction over time by program type and delivery format (online, hybrid, in-person)
+**3. Build Reporting Tool for Ongoing Monitoring**
+
+* Build interactive dashboards or automated reports to empower department leads to insights for timely decision-making.
 
 ***
 

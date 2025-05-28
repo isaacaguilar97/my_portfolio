@@ -306,12 +306,9 @@ This highlights the significant profit potential of targeted product expansion b
 
 ## 🛤️ Future Improvements
 
-1.
-
-    Enhance Competitor's Product Scoring
-
-    * Improve the product score formula by incorporating marginal profit per item (i.e., unit sale price minus cost of goods sold) to better reflect financial impact.
-    * Extend the regression model by integrating additional structured product features (e.g., material, weight, category, brand) to improve the accuracy of sales predictions.
+1. Enhance Competitor's Product Scoring
+   * Improve the product score formula by incorporating marginal profit per item (i.e., unit sale price minus cost of goods sold) to better reflect financial impact.
+   * Extend the regression model by integrating additional structured product features (e.g., material, weight, category, brand) to improve the accuracy of sales predictions.
 2. &#x20;Refine Similarity Scoring
    * &#x20;Develop two separate similarity scores: one based on structured product features and another based on image embeddings.
    * Combine both scores into a single composite metric using a weighted approach, giving more weight to structured attributes to prevent visual similarity from dominating the results.
