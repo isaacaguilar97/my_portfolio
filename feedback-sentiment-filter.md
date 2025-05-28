@@ -10,8 +10,8 @@ At BYU Continuing Education, open-ended feedback from student satisfaction surve
 
 ## 🔥 Problem Statement
 
-How can we make years of qualitative feedback more accessible, meaningful, and actionable without overwhelming department staff?\
-How can we automate sentiment classification without sacrificing accuracy or nuance?
+How can we reduce the time it takes to analyze feedback comments in a more accessible, meaningful, and actionable without overwhelming department staff?\
+How we take advantage of qualitative information?
 
 ***
 
