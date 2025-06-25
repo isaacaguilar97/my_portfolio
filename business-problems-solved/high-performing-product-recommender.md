@@ -1,3 +1,9 @@
+---
+description: >-
+  Identifying Product Gaps Between Competitor's Top Performers and Our Current
+  Catalog
+---
+
 # High-Performing Product Recommender
 
 ## 🛠️ Overview

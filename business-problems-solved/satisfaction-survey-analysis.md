@@ -1,5 +1,5 @@
 ---
-description: Reviving a Unified Satisfaction Survey for Continuing Education
+description: Reviving a Unified Satisfaction Survey for Education Programs
 ---
 
 # Satisfaction Survey Analysis
