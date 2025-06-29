@@ -1,12 +1,12 @@
 ---
-description: Reviving a Unified Satisfaction Survey for Education Programs
+description: Reviving a Unified Satisfaction Survey for Continuing Education
 ---
 
 # Satisfaction Survey Analysis
 
 ## 🛠️ Overview
 
-The satisfaction survey for the Continuing Education department had been discontinued due to its inability to provide consistent, actionable insights across a diverse range of programs. This project brought it back to life by identifying key perfomance indicators and condensing the survey structure using various regression analysis techniques.
+A generalized satisfaction survey had been discontinued due to its inability to provide consistent, actionable insights across a diverse range of programs. This project brought it back to life by identifying key perfomance indicators and condensing the survey structure using various regression analysis techniques.
 
 {% hint style="info" %}
 _Code snippets serve only as visual aids to represent the code used in the project. The actual code generated in this project is not shared for intellectual property reasons._
@@ -28,7 +28,7 @@ The original survey had two parts: a standardized set of 16 questions for all pr
 
 **Sources:**
 
-* Qualtrics survey data inlcluding:
+* Qualtrics survey data including:
   * Five years of survey responses
   * Metadata such as completion rate and time spent per respondent
 

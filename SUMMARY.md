@@ -10,7 +10,6 @@
 ***
 
 * [Feedback Sentiment Filter](feedback-sentiment-filter.md)
-* [Data Quality Validation System](data-quality-validation-system.md)
 
 ## Statistics
 
@@ -42,3 +41,7 @@
 ## Resources
 
 * [Project Template](resources/project-template.md)
+
+***
+
+* [Future Projects](future-projects.md)
