@@ -11,32 +11,31 @@
 
 * [Feedback Sentiment Filter](feedback-sentiment-filter.md)
 
-## Statistics
+## BI & Dashboards
 
-* [Web Feature Experimentation - A/B Testing](statistics/web-feature-experimentation-a-b-testing.md)
+***
+
+* [You in NBA - Web Scraping, Data Wrangling & Data Visualization](you-in-nba-web-scraping-data-wrangling-and-data-visualization.md)
+* [Chicago Crimes Batman Tool - Streamlit Dashboard](chicago-crimes-batman-tool-streamlit-dashboard.md)
+* [Power BI Project](power-bi-project.md)
+
+## Statistics Analysis
+
+* [Web Feature Experimentation - A/B Testing](statistics-analysis/web-feature-experimentation-a-b-testing.md)
 
 ***
 
 * [Pancakes' Study - ANOVA](pancakes-study-anova.md)
 * [Speed over Time - Simple Linear Regression](speed-over-time-simple-linear-regression.md)
-* [Electricity Consumption - Multiple Linear Regression](electricity-consumption-multiple-linear-regression.md)
-* [Titanic Survival - Logistic Regression](titanic-survival-logistic-regression.md)
-* [Home Value Drivers - Analysis of Correlated Data](home-value-drivers-analysis-of-correlated-data.md)
 
-## Predictive Modeling & Machine Learning
+## Machine Learning
 
-* [Predict Bike Demand - Boosted Model](predictive-modeling-and-machine-learning/predict-bike-demand-boosted-model.md)
+* [Financial Forecast - ARIMA Model](machine-learning/financial-forecast-arima-model.md)
 
 ***
 
 * [Forest Cover Type - Stacked Model](forest-cover-type-stacked-model.md)
-* [Demand of Items per Store - Forecast Analysis](demand-of-items-per-store-forecast-analysis.md)
-* [Credit Score Engine - Default Likelihood](credit-score-engine-default-likelihood.md)
-* [You in NBA - Web Scraping, Data Wrangling & Data Visualization](you-in-nba-web-scraping-data-wrangling-and-data-visualization.md)
-* [Image Classification - CNN](image-classification-cnn.md)
-* [Customer Segmentaiton - Cluster Analysis](customer-segmentaiton-cluster-analysis.md)
-* [Recommendation System - Content-based filtering](recommendation-system-content-based-filtering.md)
-* [Chicago Crimes Batman Tool - Random Forest](chicago-crimes-batman-tool-random-forest.md)
+* [Topic Modeling - Cluster Analysis](topic-modeling-cluster-analysis.md)
 
 ## Resources
 
