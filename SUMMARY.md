@@ -21,7 +21,7 @@
 
 ## Statistics Analysis
 
-* [Web Feature Experimentation - A/B Testing](statistics-analysis/web-feature-experimentation-a-b-testing.md)
+* [Web Feature Validation - A/B Testing](statistics-analysis/web-feature-validation-a-b-testing.md)
 
 ***
 
@@ -30,12 +30,11 @@
 
 ## Machine Learning
 
-* [Financial Forecast - ARIMA Model](machine-learning/financial-forecast-arima-model.md)
-
 ***
 
 * [Forest Cover Type - Stacked Model](forest-cover-type-stacked-model.md)
 * [Topic Modeling - Cluster Analysis](topic-modeling-cluster-analysis.md)
+* [Financial Forecast - ARIMA Model](financial-forecast-arima-model.md)
 
 ## Resources
 

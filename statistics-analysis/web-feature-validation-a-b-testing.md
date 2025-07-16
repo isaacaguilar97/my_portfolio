@@ -1,4 +1,4 @@
-# Web Feature Experimentation - A/B Testing
+# Web Feature Validation - A/B Testing
 
 ## 🛠️ Overview
 
@@ -6,7 +6,7 @@ As a Project Manager on a web development team, I led a series of A/B tests aime
 
 Jump right into my A/B Testing tool
 
-[#id-5.-automate-the-process-using-googlesheet](web-feature-experimentation-a-b-testing.md#id-5.-automate-the-process-using-googlesheet "mention")
+[#id-5.-automate-the-process-using-googlesheet](web-feature-validation-a-b-testing.md#id-5.-automate-the-process-using-googlesheet "mention")
 
 ***
 

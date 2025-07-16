@@ -4,7 +4,8 @@ This page is to reduce the clutter in my index with projects I haven't started w
 
 Finished but not migrated to this site:
 
-* Data Quality Validation System (Business)
+* Budgeting App - From Google Sheets to Streamlit (BI)
+* Data Quality Validation System (Problem Solved)
 * Electricity Consumption - Multiple Linear Regression (Stats)
 * Titanic Survival - Logistic Regression (Stats)
 * Home Value Drivers - Analysis of Correlated Data (Stast)
