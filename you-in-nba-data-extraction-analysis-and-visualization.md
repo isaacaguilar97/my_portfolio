@@ -21,3 +21,5 @@ This project aims to help users explore and contextualize NBA player statistics 
 * 📊 **Interactive App**: Dive into NBA player performance so you know the skills you should have to improve your game based on your characteristics and desired position using this [Streamlit dashboard](https://you-in-nba-lxpiw.streamlit.app/)
 
 <figure><img src=".gitbook/assets/Screen Shot 2025-07-17 at 8.01.02 AM.png" alt=""><figcaption></figcaption></figure>
+
+Thanks for reading, and keep the learning going!
