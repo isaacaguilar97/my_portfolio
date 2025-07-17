@@ -15,7 +15,7 @@
 
 ***
 
-* [You in NBA - Web Scraping, Data Wrangling & Data Visualization](you-in-nba-web-scraping-data-wrangling-and-data-visualization.md)
+* [You in NBA - Data Extraction,  Analysis & Visualization](you-in-nba-data-extraction-analysis-and-visualization.md)
 * [Chicago Crimes Batman Tool - Streamlit Dashboard](chicago-crimes-batman-tool-streamlit-dashboard.md)
 * [Power BI Project](power-bi-project.md)
 
