@@ -24,7 +24,7 @@
 ***
 
 * [Pancakes' Study - ANOVA](pancakes-study-anova.md)
-* [Speed over Time - Simple Linear Regression](speed-over-time-simple-linear-regression.md)
+* [Speed over Time - Regression](speed-over-time-simple-linear-regression.md)
 
 ## Machine Learning
 

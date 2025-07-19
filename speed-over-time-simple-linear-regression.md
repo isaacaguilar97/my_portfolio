@@ -2,7 +2,7 @@
 description: Predicting Top Speed Records of Production Cars Over Time
 ---
 
-# Speed over Time - Simple Linear Regression
+# Speed over Time - Regression
 
 ## 🛠️ Overview
 
@@ -12,7 +12,9 @@ This project explores how the top speeds of production cars have evolved over th
 
 ## 🔥 Problem Statement
 
-* Understand "How has the top speed of the fastest production cars changed over time?" We’ll collect data, clean it, analyze the trend, and model the relationship between **Year** and **Top Speed**.
+Understand "How has the top speed of the fastest production cars changed over time?"&#x20;
+
+We’ll collect data, clean it, analyze the trend, and model the relationship between **Year** and **Top Speed**.
 
 ***
 
