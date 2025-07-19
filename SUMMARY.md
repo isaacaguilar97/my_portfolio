@@ -28,7 +28,7 @@
 
 ## Machine Learning
 
-* [Forest Cover Type - Stacked Model](forest-cover-type-stacked-model.md)
+* [Forest Cover Type - Classification](forest-cover-type-stacked-model.md)
 * [Topic Modeling - Cluster Analysis](topic-modeling-cluster-analysis.md)
 * [Financial Forecast - ARIMA Model](financial-forecast-arima-model.md)
 
