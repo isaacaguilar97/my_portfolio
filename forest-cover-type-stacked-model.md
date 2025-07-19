@@ -264,6 +264,8 @@ results <- testSet %>%
 vroom_write(results, 'submissions.csv', delim = ",")
 ```
 
+* The final submission resulted in an accuracy of .77573
+
 ***
 
 ## 🛤️ Future Improvements
