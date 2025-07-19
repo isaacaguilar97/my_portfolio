@@ -13,9 +13,7 @@
 
 ## BI & Dashboards
 
-***
-
-* [You in NBA - Data Extraction,  Analysis & Visualization](you-in-nba-data-extraction-analysis-and-visualization.md)
+* [You in NBA - Data Extraction, Analysis & Visualization](you-in-nba-data-extraction-analysis-and-visualization.md)
 * [Chicago Crimes Batman Tool - Streamlit Dashboard](chicago-crimes-batman-tool-streamlit-dashboard.md)
 * [Power BI Project](power-bi-project.md)
 
@@ -29,8 +27,6 @@
 * [Speed over Time - Simple Linear Regression](speed-over-time-simple-linear-regression.md)
 
 ## Machine Learning
-
-***
 
 * [Forest Cover Type - Stacked Model](forest-cover-type-stacked-model.md)
 * [Topic Modeling - Cluster Analysis](topic-modeling-cluster-analysis.md)
