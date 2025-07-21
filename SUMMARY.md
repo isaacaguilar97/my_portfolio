@@ -25,12 +25,12 @@
 
 * [Pancakes' Study - ANOVA](pancakes-study-anova.md)
 * [Speed over Time - Regression](speed-over-time-simple-linear-regression.md)
+* [Sales Forecast - ARIMA](financial-forecast-arima-model.md)
 
 ## Machine Learning
 
 * [Forest Cover Type - Classification](forest-cover-type-stacked-model.md)
 * [Topic Modeling - Cluster Analysis](topic-modeling-cluster-analysis.md)
-* [Financial Forecast - ARIMA Model](financial-forecast-arima-model.md)
 
 ## Resources
 

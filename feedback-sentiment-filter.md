@@ -264,22 +264,11 @@ Make qualitative feedback more interpretable by grouping comments into meaningfu
 * Identified top areas of interest in participants (potentially new key indicators)
   * Examples include (teacher or program facilitator, content evaluation tool, customer service, content applicability in real life, etc.)
 
-> Topic Modeling Example (R)
+See topic modeling project for more information.
 
-```r
-library(tm)
-library(topicmodels)
-
-# Clean and prep text
-docs <- Corpus(VectorSource(survey_data$open_feedback))
-docs <- tm_map(docs, content_transformer(tolower))
-docs <- tm_map(docs, removePunctuation)
-docs <- tm_map(docs, removeWords, stopwords("en"))
-
-dtm <- DocumentTermMatrix(docs)
-lda_model <- LDA(dtm, k = 5)  # 5 topics
-topics <- terms(lda_model, 5)
-```
+{% content-ref url="topic-modeling-cluster-analysis.md" %}
+[topic-modeling-cluster-analysis.md](topic-modeling-cluster-analysis.md)
+{% endcontent-ref %}
 
 ### 4. Interactive Dashboard
 
