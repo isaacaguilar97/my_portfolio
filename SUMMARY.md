@@ -25,7 +25,7 @@
 
 * [Pancakes' Study - ANOVA](pancakes-study-anova.md)
 * [Speed over Time - Regression](speed-over-time-simple-linear-regression.md)
-* [Sales Forecast - ARIMA](financial-forecast-arima-model.md)
+* [Climate Forecast - SARIMA](financial-forecast-arima-model.md)
 
 ## Machine Learning
 
