@@ -277,7 +277,7 @@ Provide business users an **easy, interactive view** of product opportunities.
 > Example (Shiny R):
 
 ```r
-rCopyEditfluidPage(
+fluidPage(
   titlePanel("High Performing Product Gaps"),
   sidebarLayout(
     sidebarPanel(

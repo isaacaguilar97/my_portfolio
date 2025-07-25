@@ -8,7 +8,7 @@ Finished but not migrated to this site:
 * Data Quality Validation System (Problem Solved)
 * Electricity Consumption - Multiple Linear Regression (Stats)
 * Titanic Survival - Logistic Regression (Stats)
-* Home Value Drivers - Analysis of Correlated Data (Stast)
+* Home Value Drivers - Analysis of Correlated Data (Stats)
 * Predict Bike Demand - Boosted Model (ML)
 * Demand of Items per Store - Forecast Analysis (ML)
 * Image Classification - CNN (ML)
@@ -17,3 +17,4 @@ Finished but not migrated to this site:
 Future projects:
 
 * Credit Score Engine - Default Likelihood (Stats)
+* Power BI/Tableau Dashboard to share

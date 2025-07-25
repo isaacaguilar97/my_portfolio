@@ -15,7 +15,6 @@
 
 * [You in NBA - Data Extraction, Analysis & Visualization](you-in-nba-data-extraction-analysis-and-visualization.md)
 * [Chicago Crimes Predictor - Dashboard](chicago-crimes-batman-tool-streamlit-dashboard.md)
-* [Power BI Project](power-bi-project.md)
 
 ## Statistics Analysis
 
